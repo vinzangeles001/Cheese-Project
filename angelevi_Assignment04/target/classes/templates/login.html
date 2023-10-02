@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-exxtras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sydney's Cheesey Cheese</title>
+<link rel="stylesheet" href="../static/CSS/main.css" th:href="@{/CSS/main.css}">	
+<link rel="stylesheet" href="../static/CSS/forms.css" th:href="@{/CSS/forms.css}">	
+</head>
+<body>
+
+ 	<!-- this header is connected to the main page to access
+ 	the fragments.  -->
+    <header th:replace="fragments/main.html :: cheeseHdr('Log In')"></header>
+
+
+    <main>
+
+    <!-- this navigation is connected to the main page, to access
+    the fragments. -->    
+        <nav th:replace="fragments/main.html :: cheeseNav('login')"></nav>
+    	
+    	<section> 
+    	
+    	<!-- this check if the username or password is correct, if the input is wrong
+    	it will show an error message -->
+    <div th:if="${param.error}" class="error">Invalid user name or password.</div>
+    
+    <!-- this will show the login form  -->
+	<form method="post" th:action="@{/login}">
+	
+		<h3>Log In</h3>
+		
+		<!-- gets username -->
+		<p><label for="username">Username:
+		<input type="username" id="username" name="username">
+		</label></p>
+		
+		<!-- gets password -->
+		<p><label for="pass">Password:
+		<input type="password" id="pass" name="password">
+		</label></p>
+		
+		<p><input type="submit" name="login" value="Log In"></p>
+	
+	</form>
+        
+        </section>
+    
+    </main>
+
+ 	<!-- this footer is connected to the main page fragments to
+ 	connect all the information that this footer need -->    
+     <footer th:replace="fragments/main.html :: cheeseFtr('login')"></footer>
+    
+</body>
+</html>

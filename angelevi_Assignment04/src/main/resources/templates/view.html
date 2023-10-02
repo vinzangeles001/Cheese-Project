@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sydney's Cheesey Cheese</title>
+<link rel="stylesheet" href="../static/CSS/main.css" th:href="@{/CSS/main.css}">	
+<link rel="stylesheet" href="../static/CSS/forms.css" th:href="@{/CSS/forms.css}">	
+
+</head>
+<body>
+	
+	<!-- this header is connected to the main page to access
+ 	the fragments.  -->
+    <header th:replace="fragments/main.html :: cheeseHdr('View our Cheeses')"></header>
+ 
+    <main>
+    
+    <!-- this navigation is connected to the main page, to access
+    the fragments. -->
+    <nav th:replace="fragments/main.html :: cheeseNav('view')"></nav>
+    
+		
+        <section> 
+         <!-- this div is for checking if there is not value inside the database 
+     		if there is no value the message will show -->
+         <div th:if="${cheese.isEmpty()}">No Cheese Inventory!</div>
+         
+        <img src="../static/images/cheese.jpg" th:src="@{/images/cheese.jpg}" alt="wheels of cheese">
+        
+        <ul>
+        
+       <!--  this list will show the name, weight and the unit of the cheese -->
+       <!-- this unitsList will try to get the list from sessions if the session is null
+       it will go directly to the database -->
+        <li th:each="t :${cheese}" th:text="|${t.name}: ${t.weight} ${session.unitsList.get(t.unitsId)}|"></li>
+        
+        </ul>
+        
+        </section>
+        
+    </main>
+ 
+ 	<!-- this footer is connected to the main page fragments to
+ 	connect all the information that this footer need -->
+  	<footer th:replace="fragments/main.html :: cheeseFtr('views')"></footer>
+
+</body>
+ 
+</html>
+
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sydney's Cheesey Cheese</title>
+<link rel="stylesheet" href="../static/CSS/main.css" th:href="@{/CSS/main.css}">	
+<link rel="stylesheet" href="../static/CSS/forms.css" th:href="@{/CSS/forms.css}">	
+
+</head>
+<body>
+ 	
+ 	<!-- this header is connected to the main page to access
+ 	the fragments.  -->
+    <header th:replace="fragments/main.html :: cheeseHdr('Welcome')"></header>
+
+    <main>
+    <!-- this navigation is connected to the main page, to access
+    the fragments. -->
+    <nav th:replace="fragments/main.html :: cheeseNav('home')"></nav>
+
+        
+        <section>
+        <img src="../static/images/cheese.jpg" th:src="@{/images/cheese.jpg}" alt="wheels of cheese">
+                
+            <p>We love cheese!  Hard cheese, creamy cheese, semi-firm cheese, 
+            spreadable cheese, cream cheese, 		
+            yellow cheese, orange cheese, white cheese, green cheese, blue cheese, 
+            stinky cheese, pretty cheese, goat cheese, cow cheese, sheep 
+            cheese, but definitely not tofu cheese; funky cheese, sweet cheese,
+            sharp cheese, mild cheese, medium cheese, cheese with chunks, 
+            cheese with holes, cheese with toast, cheese with fruit, cheese 
+            with wine, curds, wheels, shreds, tubs, and so much more!</p>
+            
+            
+            <p>Bocconcini mozzarella st. agur blue cheese. Rubber cheese cheese triangles smelly 
+            cheese red leicester pepper jack bavarian bergkase chalk and cheese mascarpone. Everyone 
+            loves airedale roquefort gouda rubber cheese cheese and biscuits mozzarella camembert de 
+            normandie. Danish fontina stilton cream cheese squirty cheese goat bavarian bergkase fondue
+             cheesy feet. Parmesan taleggio port-salut boursin queso pepper jack taleggio hard 
+             cheese. Smelly cheese manchego paneer hard cheese gouda blue castello fromage.</p>
+            
+            <p>Mozzarella brie macaroni cheese. Smelly cheese caerphilly stinking bishop 
+            taleggio cheese slices chalk and cheese cheese strings cream cheese. Emmental red 
+            leicester swiss paneer taleggio cheese slices monterey jack who moved my cheese.
+             Danish fontina st. agur blue cheese swiss cheese on toast stinking bishop cream 
+             cheese danish fontina ricotta. Edam melted cheese airedale fromage frais cheesy grin
+              swiss chalk and cheese fromage frais. Croque monsieur boursin cheese and biscuits 
+              brie who moved my cheese fondue mascarpone airedale. Cut the cheese st. agur blue
+               cheese pecorino cheese strings pepper jack swiss st. agur blue cheese feta. Who
+                moved my cheese croque monsieur cut the cheese mascarpone.</p>
+        </section>
+    </main>
+ 	
+ 	<!-- this footer is connected to the main page fragments to
+ 	connect all the information that this footer need -->
+ 	<footer th:replace="fragments/main.html :: cheeseFtr('index')"></footer>
+	
+</body>
+</html>

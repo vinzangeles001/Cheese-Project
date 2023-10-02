@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sydney's Cheesey Cheese</title>
+<link rel="stylesheet" href="../static/CSS/main.css" th:href="@{/CSS/main.css}">	
+<link rel="stylesheet" href="../static/CSS/forms.css" th:href="@{/CSS/forms.css}">	
+
+</head>
+<body>
+
+ 	<!-- this header is connected to the main page to access
+ 	the fragments.  -->
+    <header th:replace="fragments/main.html :: cheeseHdr('View Cheese Inventory')"></header>
+
+ 
+    <main>
+    
+    <!-- this navigation is connected to the main page, to access
+    the fragments. -->
+    <nav th:replace="fragments/main.html :: cheeseNav('viewInv')"></nav>
+
+    <section> 
+
+        
+     <table th:object="${cheese}">
+     
+     <!-- this div is for checking if there is not value inside the database 
+     if there is no value the message will show -->
+    <div th:if="${cheese.isEmpty()}">No Cheese Inventory!</div>
+    
+    <!-- the table will come out if theres a value inside the cheese database -->
+     <tr th:unless="${cheese.isEmpty()}">
+		<th>ID</th>
+		<th>NAME</th>
+		<th>Amount</th>
+		<th>Price</th>
+	</tr>
+	
+	
+	<tr th:each="c : ${cheese}">
+		<!-- this  td shows the ID number of the database-->
+		<td th:text="${c.id}">id</td>
+		
+		<!-- this td is for the name of the cheese and if theres a specSheet
+		value inside that data the name will become a URL -->
+		<td><a th:if="${c.specSheet !=''}" th:href="${c.specSheet}" th:text="${c.name}"></a>
+		<span th:if="${c.specSheet ==''}" th:text="${c.name}"></span>
+		</td>
+		
+		<!-- this will show the quantity, the weight and the unit Id of the data 
+		and get the list from session and if the session is empty it will go get it from the database-->
+		
+		<td th:text="|${c.quantity} x ${c.weight} ${session.unitsList.get(c.unitsId)}|">amount</td>
+		
+		<!-- this will show the price of the cheese with the dollar sign -->
+		<td th:text="${#numbers.formatCurrency(c.price)}">price</td>
+		
+	</tr>
+	</table>
+        </section>
+        
+    </main>
+ 
+  	<!-- this footer is connected to the main page fragments to
+ 	connect all the information that this footer need -->
+ 	<footer th:replace="fragments/main.html :: cheeseFtr('viewInv')"></footer>
+
+</body>
+ 
+</html>
+
+

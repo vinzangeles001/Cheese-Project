@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<!-- this fragment is for the header it connects to every webpages -->
+	<header th:fragment="cheeseHdr(name)"> 
+	    <h1>Sydney's Cheesey Cheese</h1>
+		<h2 th:text="${name}"></h2>
+		
+		<!--  this is the sign in and sign out button, this change if the user is logged in or out -->
+	    <div sec:authorize="isAuthenticated()" style='text-align:right'>
+	    <a href="/logout" th:if="${name != '/login'}">Sign Out</a></div>
+	    <div sec:authorize="!isAuthenticated()" style='text-align:right'>
+	    <a href="#" th:href="@{/login}" th:if="${name != 'Log In'}">Sign in</a></div>
+	    
+	</header>
+
+	<!-- this fragment is for the navigation, it will show all the navigations
+	in all the web pages -->
+	<nav th:fragment="cheeseNav(nav)">
+	
+			<!-- this link will go to the index page -->
+            <a th:href="@{/}" th:if="${nav != 'home'}">Home</a>
+            
+        	<!-- this link will just appear if the manager log in  -->
+            <div sec:authorize="hasRole('MANAGER')">
+            <a th:href="@{/inventory/addCheese}" th:if="${nav != 'adding'}">Add Cheese Inventory</a></div>
+            
+            <!-- this link will just appear if the manager log in -->
+            <div sec:authorize="hasRole('MANAGER')">
+            <a th:href="@{/inventory/inventoryView}" th:if="${nav != 'viewInv'}">View Cheese Inventory</a></div> 
+            
+             <!-- this link will view the value inside the database
+            with the distinct value-->
+            <div sec:authorize="isAuthenticated()" th:if="${nav != 'register'}">
+            <a th:href="@{/view}" th:if="${nav != 'view'}">View Our Cheeses</a></div>
+            
+            <!-- this link will give you a chance to create an account -->
+            <a th:href="@{/register}" sec:authorize="!isAuthenticated()">Create Account</a>
+            
+            
+            <a href="#">About Us</a>   
+
+	</nav>
+	
+	<!-- this fragment is for the footer, this will show the fragments 
+	in every web pages -->
+	<footer th:fragment= "cheeseFtr(year)">
+	    <address>&copy; <span th:text="${#dates.year(#dates.createNow())}"></span> Vicente Angeles</address>
+	<!-- this will show if the you are logged in on what role. -->
+	   <div  sec:authorize="isAuthenticated()">Logged in as <span sec:authentication="name"></span></div>	
+	   </footer>
+	
+	
+	
+	
+
+</body>
+</html>

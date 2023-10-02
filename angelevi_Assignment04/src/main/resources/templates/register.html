@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sydney's Cheesey Cheese</title>
+<link rel="stylesheet" href="../static/CSS/main.css" th:href="@{/CSS/main.css}">	
+<link rel="stylesheet" href="../static/CSS/forms.css" th:href="@{/CSS/forms.css}">	
+<script src="../static/scripts/validation.js" th:src="@{/scripts/validation.js}"></script>
+
+</head>
+<body>
+
+ 	<!-- this header is connected to the main page to access
+ 	the fragments.  -->
+    <header th:replace="fragments/main.html :: cheeseHdr('Register')"></header>
+
+    <main>
+
+    <!-- this navigation is connected to the main page, to access
+    the fragments. -->    
+    <nav th:replace="fragments/main.html :: cheeseNav('register')"></nav>
+   	
+   	<section>
+   		
+   		<form name="form" action="#" th:action="@{/register}" method="post">
+   		
+   		<h3>Create an Account</h3>
+   		
+	   		<p><label for="userName">User Name:
+			<input type="userName" id="userName" name="userName" 
+			title="Enter a valid user name." required>
+			</label></p>
+			
+			<p><label for="email">Email: <input type="email" name="email" id="email" 
+		 	title="Enter a valid email address." >
+		 	</label></p>
+			
+			<p><label for="password">Password: <input type="password" name="password" 
+			id="password" title="Choose a password." required>
+			</label></p>
+			
+			<p><label for="verify">Verify Password: <input type="password" name="verify" 
+			id="verify" title="Re-enter the same password." required>
+			</label></p>
+			
+			<p><input type="submit" value="Register"></p>
+			
+   		</form>
+   	</section>
+   	
+   	</main>
+
+ 	<!-- this footer is connected to the main page fragments to
+ 	connect all the information that this footer need -->   	
+   	<footer th:replace="fragments/main.html :: cheeseFtr('register')"></footer>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sydney's Cheesey Cheese</title>
+<link rel="stylesheet" href="../static/CSS/main.css" th:href="@{/CSS/main.css}">	
+<link rel="stylesheet" href="../static/CSS/forms.css" th:href="@{/CSS/forms.css}">	
+
+</head>
+ 
+<body>
+ 
+  	<!-- this header is connected to the main page to access
+ 	the fragments.  -->
+    <header th:replace="fragments/main.html :: cheeseHdr('Add Cheese Inventory')"></header>
+         
+    <main>
+    
+    <!-- this navigation is connected to the main page, to access
+    the fragments. -->    
+    <nav th:replace="fragments/main.html :: cheeseNav('adding')"></nav>
+    
+ 		
+        <section>
+        
+
+            <!-- from this form everything that the user inputs here 
+            will be the value of the cheese -->
+       <form method="post" th:action="@{/inventory/addCheese}" action="/inventory/addCheese" th:object="${cheese}">
+        
+        <h3>Add Cheese to Inventory</h3>
+        
+        
+        <!-- this will get the name of the cheese -->
+        <p><label for="name">NAME:
+        	<input type="text" id="name" name="name" th:field="*{name}"  
+        		maxlength="255" required>
+        </label>
+        </p>
+        
+        <fieldset>
+        <legend>Amount Received</legend>
+        
+        <div>
+        
+        <!-- this will get the how many cheese will the user input -->
+        <label for="quantity">QUANTITY: 
+        	<input type="number" id="quantity" name="quantity" 
+        		th:field="*{quantity}" min="1" required>
+        </label>
+        </div>
+        
+        <div>
+        
+        <!-- this will get the how much weight of the  cheese will the user input -->
+        <label for="weight">WEIGHT: 
+        	<input type="number" id="weight" name="weight"  th:field="*{weight}" 
+        		pattern="(\d*\.)?\d+" required> 
+        </label>
+        
+        <!-- the value of units came from the database, and we will use it 
+        to show the units in the web page-->
+        <label for="unitsId">UNITS:
+	        <select id="unitsId" name="unitsId" th:field="*{unitsId}">
+	        <!-- this session.unitsList is getting the list from the session 
+	        if the session is empty it will go straight to the database to get the list -->
+	        	<option th:each="t: ${session.unitsList}" th:text="${t}" th:value="${t.id}" value="">units</option>
+	        	
+	        </select>
+        </label>
+        </div> 	
+        
+        </fieldset>
+        
+        <!-- this will get the price of the cheese -->
+        <p>
+        <label for="price">PRICE:
+        	<input type="number" id="price" name="price" required th:field="*{price}">
+        </label>
+        </p>
+        
+        <!-- this is the text field for the URL value  -->
+        <p>
+        <label for="url">SPEC SHEET URL:
+        	<input type="url" id="specSheet" name="specSheet" th:field="*{specSheet}">
+        </label>
+        </p>
+        
+        
+        <p>
+        	<input type="submit" >
+        	
+        	<input type="reset">
+        </p>
+        
+        </form>
+            
+        </section>
+        
+    </main>
+
+ 	<!-- this footer is connected to the main page fragments to
+ 	connect all the information that this footer need --> 
+  	<footer th:replace="fragments/main.html :: cheeseFtr('adding')"></footer>
+
+</body>
+ 
+</html>
